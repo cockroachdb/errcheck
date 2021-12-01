@@ -75,6 +75,7 @@ func runAnalyzer(pass *analysis.Pass) (interface{}, error) {
 		ast.Walk(v, f)
 
 		for _, err := range v.errors {
+			fmt.Printf("line = %s, funcname = %s, selectorname = %s", err.Line, err.FuncName, err.SelectorName)
 			pass.Report(analysis.Diagnostic{
 				Pos:     token.Pos(int(f.Pos()) + err.Pos.Offset),
 				Message: "unchecked error",
